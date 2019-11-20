@@ -56,8 +56,6 @@ function start(countR, countC) {
 function select(event, id) {
     sEvent = event.which;
     sId = id;
-    var test = document.getElementById("Test");
-    test.innerHTML = sId + ": " + sEvent;
 }
 
 function confirm(id) {
