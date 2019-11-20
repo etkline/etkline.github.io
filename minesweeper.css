@@ -1,0 +1,23 @@
+#stripe { font-size: 0; text-align: center; }
+table { border-collapse: collapse; margin: 0 }
+tr, td { padding: 0; }
+
+.sqr {
+    width: calc(20px + .75vw);
+    min-width: 30px;
+
+    height: calc(20px + .75vw);
+    min-height: 30px;
+
+    display:inline-block;
+}
+.img {
+    font-size: calc(8px + 0.25vw);
+    background-color: #f2f2f2;
+}
+
+.txt {
+    font-size: calc(8pt + 0.5vs);
+    background-color: #dddddd;
+    color: black;
+}
