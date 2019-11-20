@@ -1,5 +1,5 @@
 // Disables Right-Click
-window.oncontextmenu = function() {return false;}
+//window.oncontextmenu = function() {return false;}
 
 // global static vars
 var sEvent;
@@ -72,8 +72,8 @@ function confirm(id) {
 
                 while (minePos.length < 99) {
                     var prng = new Math.seedrandom();
-                    var row = Math.floor(prng() * numRows);
-                    var col = Math.floor(prng() * numCols);
+                    var row = Math.floor(Math.random() * numRows);
+                    var col = Math.floor(Math.random() * numCols);
 
                     var mineId = row + "," + col;
                     if (Math.abs(rPos - row) > 1 || Math.abs(cPos - col) > 1) {
