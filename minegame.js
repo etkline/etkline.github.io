@@ -1,5 +1,18 @@
 // Disables Right-Click
-window.oncontextmenu = function() {return false;}
+//window.oncontextmenu = function() {return false;}
+
+// Firebase API Test
+var request = new XMLHttpRequest();
+request.open("GET", "https://us-central1-test-9d6bc.cloudfunctions.net/:helloWorld");
+request.onload = function() {
+    var data = JSON.parse(this.response);
+    if (request.status == 200) {
+        document.getElementById("apiTest").innerHTML = data.message;
+    } else {
+        document.getElementById("apiTest").innerHTML = "Error!";
+    }
+}
+request.send();
 
 // global static vars
 var sEvent;
