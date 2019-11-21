@@ -3,13 +3,13 @@
 
 // Firebase API Test
 var request = new XMLHttpRequest();
-request.open("GET", "https://us-central1-test-9d6bc.cloudfunctions.net/:helloWorld");
+request.open("GET", "https://us-central1-test-9d6bc.cloudfunctions.net/helloWorld");
 request.onload = function() {
     var data = JSON.parse(this.response);
     if (request.status == 200) {
-        document.getElementById("apiTest").innerHTML = data.message;
+        document.getElementById("apiTest").innerHTML = "<h3>" + data.message + "</h3>";
     } else {
-        document.getElementById("apiTest").innerHTML = "Error!";
+        document.getElementById("apiTest").innerHTML = "<h3>Connection Error!</h3>";
     }
 }
 request.send();
