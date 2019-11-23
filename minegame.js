@@ -3,17 +3,17 @@
 // https://firestore.googleapis.com/v1/projects/test-9d6bc/databases/(default)/documents/easy
 
 //let docRef = fire
-//var request = new XMLHttpRequest();
-//request.open("GET", "https://firestore.googleapis.com/v1/projects/test-9d6bc/databases/(default)/documents/hard");
-//request.onload = function() {
-//    var data = JSON.parse(this.response);
-//    if (request.status == 200) {
-//        document.getElementById("apiTest").innerHTML = "<h3>" + data.name + "</h3>";
-//    } else {
-//        document.getElementById("apiTest").innerHTML = "<h3>Connection Error!</h3>";
-//    }
-//}
-//request.send();
+var request = new XMLHttpRequest();
+request.open("GET", "https://us-central1-test-9d6bc.cloudfunctions.net/helloWorld");
+request.onload = function() {
+    var data = JSON.parse(this.response);
+    if (request.status == 200) {
+        document.getElementById("apiTest").innerHTML = "<h3>" + data.message + "</h3>";
+    } else {
+        document.getElementById("apiTest").innerHTML = "<h3>Connection Error!</h3>";
+    }
+}
+request.send();
 
 // global static vars
 var sEvent;
