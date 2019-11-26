@@ -1,5 +1,5 @@
-// Disables Right-Click
-window.oncontextmenu = function() {return false;}
+// Disables Right-Click (want to inspect web page)
+//window.oncontextmenu = function() {return false;}
 
 // Cloud Firestore GET Request (Don't use during testing):
 // https://firestore.googleapis.com/v1/projects/test-9d6bc/databases/(default)/documents/easy
@@ -15,7 +15,7 @@ request.onload = function() {
         document.getElementById("apiTest").innerHTML = "<h3>Connection Error!</h3>";
     }
 }
-request.send();
+//request.send(); // Comment out line when wanting to disable http requests
 
 // global static vars
 var sEvent;
