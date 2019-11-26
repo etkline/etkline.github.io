@@ -93,7 +93,7 @@ function confirm(id) {
                     var col = Math.floor(prng() * numCols);
 
                     var mineId = row + "," + col;
-                    if (Math.abs(rPos - row) > 1 || Math.abs(cPos - col) > 1) {
+                    if (!minePos.includes(mineId) && (Math.abs(rPos - row) > 1 || Math.abs(cPos - col) > 1)) {
                         minePos.push(mineId);
                     }
                 }

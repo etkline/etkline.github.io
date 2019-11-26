@@ -1,9 +1,11 @@
+/* Removes margins, padding and unwanted borders */
 #stripe { font-size: 0; text-align: center; }
 body { background-color: rgb(127, 190, 255); }
 
 table { border-collapse: collapse; margin: 0 }
 tr, td { padding: 0; }
 
+/* Computes dimensions of buttons, icons and text */
 .sqr {
     width: calc(20px + .75vw);
     min-width: 30px;
