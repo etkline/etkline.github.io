@@ -1,5 +1,7 @@
 /* Removes margins, padding and unwanted borders */
 #stripe { font-size: 0; text-align: center; }
+body { background-color: rgb(127, 190, 255); }
+
 table { border-collapse: collapse; margin: 0 }
 tr, td { padding: 0; }
 
@@ -15,7 +17,7 @@ tr, td { padding: 0; }
 }
 .img {
     font-size: calc(8px + 0.25vw);
-    background-color: #f2f2f2;
+    background-color: #d2d2d2;
 }
 
 .txt {

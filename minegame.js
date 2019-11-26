@@ -1,8 +1,7 @@
-// Firebase API Test
-// Firebase DB GET Request: https://test-9d6bc.firebaseio.com/Easy/First.json
+// Cloud Firestore GET Request (Don't use during testing):
 // https://firestore.googleapis.com/v1/projects/test-9d6bc/databases/(default)/documents/easy
 
-//let docRef = fire
+// Firebase API Test: Send HTTP GET Request to Firebase Cloud Functions
 var request = new XMLHttpRequest();
 request.open("GET", "https://us-central1-test-9d6bc.cloudfunctions.net/helloWorld");
 request.onload = function() {
@@ -15,10 +14,7 @@ request.onload = function() {
 }
 request.send();
 
-// global static vars
-var sEvent;
-var sId;
-
+// global static variables
 var numRows;
 var numCols;
 var started = false;
@@ -67,6 +63,10 @@ function start(countR, countC) {
     started = false;
 }
 
+// Remember selection made
+var sEvent;
+var sId;
+
 function select(event, id) {
     sEvent = event.which;
     sId = id;
@@ -77,13 +77,16 @@ function confirm(id) {
     // if selection confirmed
     if (id == sId) {
 
-        // if left-click
+        // if left button click...
         if (sEvent == 1 && document.getElementById(id).innerHTML == "") {
+
+            // generate mines after first selection (for fairness)
             if (!started) {
                 var pos = id.split(",");
                 var rPos = parseInt(pos[0]);
                 var cPos = parseInt(pos[1]);
 
+                // Generates mines
                 while (minePos.length < 99) {
                     var prng = new Math.seedrandom();
                     var row = Math.floor(prng() * numRows);
@@ -96,8 +99,11 @@ function confirm(id) {
                 }
             }
 
+            // If square holds a mine...
             if (minePos.includes(id)) {
                 for (var mineId of minePos) {
+
+                    // Shows different icon for mine that was hit
                     if (mineId == id) {
                         document.getElementById(mineId).innerHTML = "&#128165;";
                     } else {
@@ -120,19 +126,26 @@ function confirm(id) {
     }
 }
 
+// Computes the square's values from the adjacent spaces
+// each adjacent mine increments the square's value
 function displayValue(id) {
+
+    // Reformat button to display text
     var btn = document.getElementById(id);
     btn.classList.remove("img");
     btn.classList.add("txt");
 
+    // Get position from id
     var pos = id.split(",");
-
     var row = parseInt(pos[0]);
     var col = parseInt(pos[1]);
 
+    // Keep track of adjacent positions
+    // (for when there are no adjacent mines)
     var adjPos = [];
     var count = 0;
 
+    // Checks adjacent squares
     for (var i = -1; i <= 1; i++) {
         var r = row + i;
 
@@ -146,17 +159,26 @@ function displayValue(id) {
             }
         }
     }
+
+    // If no adjacent mines then display adj sqrs
     if (count == 0) {
+
+        // Text for squares with a value of 0 is set to a
+        // "space" to differentiate from unchecked spuares.
         btn.innerHTML = " ";
         btn.disabled = true;
 
         for (var pos of adjPos) {
             var sqr = document.getElementById(pos);
+
+            // Includes flags in checked squares
             if (sqr.innerHTML == "" || sqr.innerHTML == "\uD83D\uDEA9") {
                 displayValue(pos);
             }
         }
     } else {
+
+        // Display the square's value
         btn.innerHTML = "<b>" + count + "</b>";
         btn.disabled = true;
     }
