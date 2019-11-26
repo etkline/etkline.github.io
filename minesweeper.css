@@ -1,4 +1,6 @@
 #stripe { font-size: 0; text-align: center; }
+body { background-color: rgb(127, 190, 255); }
+
 table { border-collapse: collapse; margin: 0 }
 tr, td { padding: 0; }
 
