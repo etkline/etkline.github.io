@@ -12,7 +12,7 @@ request.onload = function() {
         document.getElementById("apiTest").innerHTML = "<h3>Connection Error!</h3>";
     }
 }
-request.send();
+//request.send(); // Comment out line when wanting to disable http requests
 
 // global static variables
 var numRows;
@@ -101,6 +101,8 @@ function confirm(id) {
 
             // If square holds a mine...
             if (minePos.includes(id)) {
+                alert('Game over!');
+
                 for (var mineId of minePos) {
 
                     // Shows different icon for mine that was hit
