@@ -22,7 +22,7 @@ function confirm(id) {
                 var cPos = parseInt(pos[1]);
 
                 // Generates mines
-                while (minePos.length < 99) {
+                while (minePos.length < mines) {
                     var prng = new Math.seedrandom();
                     var row = Math.floor(prng() * numRows);
                     var col = Math.floor(prng() * numCols);
@@ -32,7 +32,7 @@ function confirm(id) {
                         minePos.push(mineId);
                     }
                 }
-                remSpaces -= 99;
+                remSpaces -= mines;
 
                 started = true;
                 startTime = new Date();

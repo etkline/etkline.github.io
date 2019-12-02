@@ -8,8 +8,10 @@
         <link rel="stylesheet" type="text/css" href="minesweeper.css">
 
         <script src="seedrandom-3.0.5/seedrandom.min.js"></script>
+
         <script src="minegame.js"></script>
         <script src="events.js"></script>
+        <script src="difficulty.js"></script>
         <script src="timer.js"></script>
     </head>
     <body onload="tick()">
@@ -17,12 +19,36 @@
         <!-- button type="button" onclick="start(16, 30)">New Game</button> -->
 
         <div class="topnav">
-            <a onclick="start(16, 30)"><b>New Game</b></a>
+            <a onclick="start()"><b>New Game</b></a>
             <a id="flags" onclick="swapSelect()">
                 <span class="flag">&#128681;</span><b>: <span id="flgRem">99</span></b>
             </a>
             <a><b>Time: <span id="time">0</span></b></a>
-            <a><input type="radio" name="diff" value="hard"></></a>
+
+            <a onclick="difficulty(0, 'e')">
+                <input type="radio" name="diff" onclick="difficulty(0, 'e')" id="e"> Easy
+            </a>
+            <a onclick="difficulty(1, 'm')">
+                <input type="radio" name="diff" onclick="difficulty(1, 'm')" id="m"> Medium
+            </a>
+            <a onclick="difficulty(2, 'h')">
+                <input type="radio" name="diff" onclick="difficulty(2, 'h')" id="h" checked> Hard
+            </a>
+            <a onclick="customDiff()">
+                <input type="radio" name="diff" onclick="customDiff()" id="c"> Custom
+            </a>
+
+            <a><span id="row" style="display: none">
+                Row <input type="number" value="16" min="1" max="20" id="rVal">
+            </span></a>
+
+            <a><span id="col" style="display: none">
+                Column <input type="number" value="30" min="1" max="40" id="cVal">
+            </span></a>
+
+            <a><span id="mine" style="display: none">
+                Mine <input type="number" value="99" min="0" max="200" id="mVal">
+            </span></a>
         </div>
 
         <!-- New Line -->

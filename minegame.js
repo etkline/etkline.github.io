@@ -15,22 +15,32 @@ request.onload = function() {
 //request.send(); // Comment out line when wanting to disable http requests
 
 // global static variables
-var mines = 99;
+var mines;
 var numRows;
 var numCols;
 
 // board state vars
-var flagCount = 99;
+var flagCount;
 var putFlags = false;
 var minePos = [];
-var remSpaces = 0;
+var remSpaces;
 
 // Creates game board
-function start(countR, countC) {
+function start() {
+    started = false;
 
-    numRows = countR;
-    numCols = countC;
+    if (custom) {
+        numRows = document.getElementById("rVal").value;
+        numCols = document.getElementById("cVal").value;
+        mines = Math.min(document.getElementById("mVal").value, (numRows * numCols - 1));
+    } else {
+        numRows = rowCount;
+        numCols = colCount;
+        mines = mineCount;
+    }
     remSpaces = numRows * numCols;
+    flagCount = mines;
+    numTicks = 0;
 
     // Get's table and creates body to contain the board
     var game = document.getElementById("game");
@@ -64,11 +74,8 @@ function start(countR, countC) {
     // creates a new gameboard
     game.replaceChild(board, document.getElementById("board"));
     minePos.length = 0;
-    flagCount = 99;
 
     document.getElementById("flgRem").innerHTML = flagCount;
-    started = false;
-    numTicks = 0;
     document.getElementById('time').innerHTML = numTicks;
 }
 
