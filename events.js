@@ -65,7 +65,7 @@ function confirm(id) {
                 flagCount++;
 
                 document.getElementById("flgRem").innerHTML = flagCount;
-            } else if (btn.innerHTML == "") {
+            } else if (flagCount > 0 && btn.innerHTML == "") {
                 btn.innerHTML = "&#128681;";
                 flagCount--;
 
@@ -83,6 +83,14 @@ function displayValue(id) {
     var btn = document.getElementById(id);
     btn.classList.remove("img");
     btn.classList.add("txt");
+
+    // UTF-16 equivalent for 🚩
+    // Clears flags from board (prevents bug with flag count)
+    if (btn.innerHTML == "\uD83D\uDEA9") {
+        flagCount++;
+
+        document.getElementById("flgRem").innerHTML = flagCount;
+    }
 
     // Get position from id
     var pos = id.split(",");
