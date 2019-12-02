@@ -19,6 +19,8 @@ var numRows;
 var numCols;
 var started = false;
 
+var flagCount = 99;
+var putFlags = false;
 var minePos = [];
 
 // Creates game board
@@ -59,7 +61,9 @@ function start(countR, countC) {
     // creates a new gameboard
     game.replaceChild(board, document.getElementById("board"));
     minePos.length = 0;
+    flagCount = 99;
 
+    document.getElementById("flgRem").innerHTML = flagCount;
     started = false;
 }
 
@@ -78,7 +82,7 @@ function confirm(id) {
     if (id == sId) {
 
         // if left button click...
-        if (sEvent == 1 && document.getElementById(id).innerHTML == "") {
+        if (sEvent == 1 && !putFlags && document.getElementById(id).innerHTML == "") {
 
             // generate mines after first selection (for fairness)
             if (!started) {
@@ -115,14 +119,20 @@ function confirm(id) {
             } else {
                 displayValue(id);
             }
-        } else if (sEvent == 3) {
+        } else if (sEvent == 3 || putFlags) {
             var btn = document.getElementById(id);
 
             // UTF-16 equivalent for 🚩
             if (btn.innerHTML == "\uD83D\uDEA9") {
                 btn.innerHTML = "";
+                flagCount++;
+
+                document.getElementById("flgRem").innerHTML = flagCount;
             } else if (btn.innerHTML == "") {
                 btn.innerHTML = "&#128681;";
+                flagCount--;
+
+                document.getElementById("flgRem").innerHTML = flagCount;
             }
         }
     }
@@ -183,5 +193,17 @@ function displayValue(id) {
         // Display the square's value
         btn.innerHTML = "<b>" + count + "</b>";
         btn.disabled = true;
+    }
+}
+
+function swapSelect() {
+    putFlags = !putFlags;
+    var flags = document.getElementById("flags");
+    if (putFlags) {
+        flags.style.backgroundColor = "#ddd";
+        flags.style.color = "#000000";
+    } else {
+        flags.style.backgroundColor = "";
+        flags.style.color = "";
     }
 }

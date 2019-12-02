@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Minesweeper</title>
+
         <!-- Bootstrap CSS -->
         <!-- link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" -->
         <link rel="stylesheet" type="text/css" href="minesweeper.css">
 
         <script src="seedrandom-3.0.5/seedrandom.min.js"></script>
         <script src="minegame.js"></script>
-
-        <title>Minesweeper</title>
     </head>
     <body>
         <!-- Initial Button -->
-        <button type="button" onclick="start(16, 30)">New Game</button>
+        <!-- button type="button" onclick="start(16, 30)">New Game</button> -->
+
+        <div class="topnav">
+            <a onclick="start(16, 30)"><b>New Game</b></a>
+            <a id="flags" onclick="swapSelect()">
+                <span class="flag">&#128681;</span><b>: <span id="flgRem"></span></b>
+            </a>
+            <a id="apiTest"><b>Time:</b></a>
+        </div>
 
         <!-- New Line -->
-        <p id="apiTest"></p>
+        <p></p>
 
         <!-- Gameboard -->
         <div id="stripe" style="width: 45%" oncontextmenu="return false;">
-            <table id="game">
+            <table id="game" style="border: 1.5pt solid black;">
                 <tbody id="board"></tbody>
             </table>
         </div>
