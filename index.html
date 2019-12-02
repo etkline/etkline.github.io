@@ -9,17 +9,20 @@
 
         <script src="seedrandom-3.0.5/seedrandom.min.js"></script>
         <script src="minegame.js"></script>
+        <script src="events.js"></script>
+        <script src="timer.js"></script>
     </head>
-    <body>
+    <body onload="tick()">
         <!-- Initial Button -->
         <!-- button type="button" onclick="start(16, 30)">New Game</button> -->
 
         <div class="topnav">
             <a onclick="start(16, 30)"><b>New Game</b></a>
             <a id="flags" onclick="swapSelect()">
-                <span class="flag">&#128681;</span><b>: <span id="flgRem"></span></b>
+                <span class="flag">&#128681;</span><b>: <span id="flgRem">99</span></b>
             </a>
-            <a id="apiTest"><b>Time:</b></a>
+            <a><b>Time: <span id="time">0</span></b></a>
+            <a><input type="radio" name="diff" value="hard"></></a>
         </div>
 
         <!-- New Line -->
