@@ -10,16 +10,18 @@
         <script src="seedrandom-3.0.5/seedrandom.min.js"></script>
 
         <script src="minegame.js"></script>
+        <script src="scores.js"></script>
         <script src="events.js"></script>
         <script src="difficulty.js"></script>
         <script src="timer.js"></script>
     </head>
     <body onload="tick()">
         <!-- Initial Button -->
-        <!-- button type="button" onclick="start(16, 30)">New Game</button> -->
 
         <div class="topnav">
+            <a onclick="getScores()"><b>View Scores</b></a>
             <a onclick="start()"><b>New Game</b></a>
+
             <a id="flags" onclick="swapSelect()">
                 <span class="flag">&#128681;</span><b>: <span id="flgRem">99</span></b>
             </a>
