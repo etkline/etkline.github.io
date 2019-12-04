@@ -1,4 +1,7 @@
 // global static variables
+var isCustom = false;
+var diffSetting = "hard";
+
 var mines;
 var numRows;
 var numCols;
@@ -13,6 +16,8 @@ var remSpaces;
 function start() {
     started = false;
 
+    isCustom = custom;
+    diffSetting = endpoints[diffIndex];
     if (custom) {
         numRows = document.getElementById("rVal").value;
         numCols = document.getElementById("cVal").value;
@@ -20,7 +25,11 @@ function start() {
     } else {
         numRows = rowCount;
         numCols = colCount;
-        mines = mineCount;
+        if (numRows * numCols - mineCount < 9) {
+            mines = 8;
+        } else {
+            mines = mineCount;
+        }
     }
     remSpaces = numRows * numCols;
     flagCount = mines;

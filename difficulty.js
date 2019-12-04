@@ -3,12 +3,15 @@ var rowCount = 16;
 var colCount = 30;
 var mineCount = 99;
 
+var diffIndex = 2;
 var custom = false;
 
 function difficulty(index, id) {
     rowCount = diffs[index][0];
     colCount = diffs[index][1];
     mineCount = diffs[index][2];
+
+    diffIndex = index;
 
     document.getElementById(id).checked = true;
     document.getElementById("row").style.display = "none";

@@ -28,7 +28,8 @@ function confirm(id) {
                     var col = Math.floor(prng() * numCols);
 
                     var mineId = row + "," + col;
-                    if (!minePos.includes(mineId) && (Math.abs(rPos - row) > 1 || Math.abs(cPos - col) > 1)) {
+                    if (!minePos.includes(mineId) && ((numRows * numCols - mines < 9 && id != mineId)
+                        || Math.abs(rPos - row) > 1 || Math.abs(cPos - col) > 1)) {
                         minePos.push(mineId);
                     }
                 }
@@ -75,6 +76,7 @@ function confirm(id) {
     }
 }
 
+var colors = ["white", "forestgreen", "blue", "#ff8000", "saddlebrown ", "red", "deeppink", "purple", "black"];
 // Computes the square's values from the adjacent spaces
 // each adjacent mine increments the square's value
 function displayValue(id) {
@@ -138,11 +140,17 @@ function displayValue(id) {
 
         // Display the square's value
         btn.innerHTML = "<b>" + count + "</b>";
+        btn.style.color = colors[count];
         btn.disabled = true;
     }
 
     if (remSpaces == 0) {
         started = false;
-        alert("You Win!");
+        for (var row = 0; row < numRows; row++) {
+            for (var col = 0; col < numCols; col++) {
+                document.getElementById(row + "," + col).disabled = true;
+            }
+        }
+        enterTime();
     }
 }
