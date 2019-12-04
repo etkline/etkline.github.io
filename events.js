@@ -42,6 +42,7 @@ function confirm(id) {
             // If square holds a mine...
             if (minePos.includes(id)) {
                 started = false;
+                disableBoard();
                 alert('Game over!');
 
                 for (var mineId of minePos) {
@@ -145,12 +146,16 @@ function displayValue(id) {
     }
 
     if (remSpaces == 0) {
-        started = false;
-        for (var row = 0; row < numRows; row++) {
-            for (var col = 0; col < numCols; col++) {
-                document.getElementById(row + "," + col).disabled = true;
-            }
-        }
+        disableBoard();
         enterTime();
+    }
+}
+
+function disableBoard() {
+    started = false;
+    for (var row = 0; row < numRows; row++) {
+        for (var col = 0; col < numCols; col++) {
+            document.getElementById(row + "," + col).disabled = true;
+        }
     }
 }
