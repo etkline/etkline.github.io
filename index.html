@@ -64,10 +64,9 @@
                     <span class="close" onclick="closeModal()">&times;</span>
                     <h2 id="mTitle">High Scores</h2>
                 </div>
-                <p>
-                    <input type="file" id="myFile"><br>
-                    <button onclick="submitFile()">Sumbit Scores</button><br>
-                    <div id="content"></div>
+                <p style="margin-left: 12px">
+                    Import Scores: <input type="file" id="myFile" accept=".json" onchange="importFile(this.files[0])"><br>
+                    Export Scores: <button  onclick="exportFile()">Download</button>
                 </p>
                 <div id="mBody" class="modal-body"></div>
             </div>

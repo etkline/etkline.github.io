@@ -4,6 +4,7 @@ function viewScores() {
 
     var entries = [];
     for (var i = 0; i < 3; i++) {
+        // change to match your endpoint
         var url = "https://us-central1-test-9d6bc.cloudfunctions.net/" + endpoints[i] + "Scores";
 
         // Synchronous XMLHttpRequests are deprecated but are the most
@@ -13,12 +14,11 @@ function viewScores() {
             entries.push(JSON.parse(this.response)[endpoints[i]]);
         }
         request.open("GET", url, false);
-        //request.send(); // Comment out line when wanting to disable http requests
+        request.send(); // Comment out line when wanting to disable http requests
     }
     document.getElementById("mTitle").innerHTML = "High Scores";
     document.getElementById("myModal").style.display = "block";
-    //var len = Math.max(entries[0].length, entries[1].length, entries[2].length);
-    var len = 0;
+    var len = Math.max(entries[0].length, entries[1].length, entries[2].length);
 
     // Creates table to display data
     var table = '<table id="leaderboard" class="scoreTable" style="border: 1.5pt solid black;">'
@@ -49,12 +49,39 @@ function viewScores() {
     document.getElementById("mBody").innerHTML = table;
 }
 
-function submitFile() {
+// File Import and Export only added as default import and export options are
+// unintuitive for Cloud Firestore Database (Not the same as Realtime DB)
+function importFile(file) {
     var reader = new FileReader();
-    reader.readAsText(document.getElementById("myFile").files[0]);
+    reader.readAsText(file);
     reader.onloadend = function() {
-        document.getElementById("content").innerHTML = reader.result;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onload = function () {
+            var info = JSON.parse(this.response);
+            alert("Submitted: " + file.name +
+                    "\nTotal Entries: " + info.total);
+        };
+
+        // change to match your endpoint
+        xhttp.open("POST", "https://us-central1-test-9d6bc.cloudfunctions.net/importData");
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(reader.result); // Comment out line when wanting to disable http requests
     }
+}
+
+function exportFile() {
+    let request = new XMLHttpRequest();
+    request.responseType = "blob";
+    request.onload = function() {
+        var a = document.createElement("a");
+        a.href = window.URL.createObjectURL(this.response);
+        a.download = "firebase_content.json";
+        a.click();
+    }
+
+    // change to match your endpoint
+    request.open("GET", "https://us-central1-test-9d6bc.cloudfunctions.net/exportData");
+    request.send(); // Comment out line when wanting to disable http requests
 }
 
 function enterTime() {
@@ -90,6 +117,8 @@ function submit() {
                         + '<button onclick="closeModal()">OK</button>';
             }
         };
+
+        // change to match your endpoint
         xhttp.open("POST", "https://us-central1-test-9d6bc.cloudfunctions.net/insertScore");
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send('{"difficulty":"' + diffSetting + '","name":"' + nameInput.value + '","time":' + numTicks + '}'); // Comment out line when wanting to disable http requests
