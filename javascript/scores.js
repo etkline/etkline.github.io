@@ -13,11 +13,12 @@ function viewScores() {
             entries.push(JSON.parse(this.response)[endpoints[i]]);
         }
         request.open("GET", url, false);
-        request.send(); // Comment out line when wanting to disable http requests
+        //request.send(); // Comment out line when wanting to disable http requests
     }
     document.getElementById("mTitle").innerHTML = "High Scores";
     document.getElementById("myModal").style.display = "block";
-    var len = Math.max(entries[0].length, entries[1].length, entries[2].length);
+    //var len = Math.max(entries[0].length, entries[1].length, entries[2].length);
+    var len = 0;
 
     // Creates table to display data
     var table = '<table id="leaderboard" class="scoreTable" style="border: 1.5pt solid black;">'
@@ -46,6 +47,14 @@ function viewScores() {
     }
     table += '</tbody><table>';
     document.getElementById("mBody").innerHTML = table;
+}
+
+function submitFile() {
+    var reader = new FileReader();
+    reader.readAsText(document.getElementById("myFile").files[0]);
+    reader.onloadend = function() {
+        document.getElementById("content").innerHTML = reader.result;
+    }
 }
 
 function enterTime() {

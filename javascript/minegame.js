@@ -39,6 +39,7 @@ function start() {
     var game = document.getElementById("game");
     var board = document.createElement("tbody");
     board.id = "board";
+    
 
     // creates rows to house buttons
     for (var i = 0; i < numRows; i++) {
